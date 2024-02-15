@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="peach">#C35B5B</color>
+    <color name="dark_peach">#773232</color>
+    <color name="light_peach">#FAD3D3</color>
+    <color name="disabled">#83C5C2C2</color>
+</resources>

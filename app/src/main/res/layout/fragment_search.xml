@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8CDCD"
+    tools:context=".ui.fragments.SearchFragment">
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+
+
+      <EditText
+          android:id="@+id/cat_frag_search_et"
+          android:layout_width="match_parent"
+          android:layout_height="50dp"
+          android:layout_marginHorizontal="15dp"
+          android:background="@drawable/outline_bg"
+          android:elevation="5dp"
+          android:gravity="start"
+          android:hint="Search movies here.."
+          android:inputType="textShortMessage"
+          android:paddingVertical="10dp"
+          android:paddingStart="10dp"
+          android:paddingEnd="6dp"
+          android:singleLine="true"
+          android:textColorHint="#252525"
+          android:textSize="20sp"
+          android:textColor="@color/black"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          tools:layout_editor_absoluteX="15dp" />
+
+      <com.google.android.material.floatingactionbutton.FloatingActionButton
+          android:id="@+id/search_btn"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="20dp"
+          android:backgroundTint="@color/peach"
+          app:tint = "@color/white"
+          android:src="@drawable/baseline_arrow_forward_ios_24"
+          app:layout_constraintEnd_toEndOf="@+id/cat_frag_search_et"
+          app:layout_constraintStart_toStartOf="@+id/cat_frag_search_et"
+          app:layout_constraintTop_toBottomOf="@+id/cat_frag_search_et" />
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>
