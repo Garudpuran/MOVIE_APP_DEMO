@@ -16,7 +16,6 @@ import javax.inject.Inject
 class MovieViewModel @Inject constructor(
     private val movieRepo: MovieRepo
 ) : ViewModel() {
-
     private val _movieLiveData = MutableLiveData<NetworkResult<List<Search>>>()
     val movieLiveData: LiveData<NetworkResult<List<Search>>> get() = _movieLiveData
 

@@ -1,6 +1,6 @@
 package com.android.movieapp.ui.fragments
 
-import MovieListAdapter
+import com.android.movieapp.ui.MovieListAdapter
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater

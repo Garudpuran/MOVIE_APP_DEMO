@@ -1,7 +1,6 @@
 package com.android.movieapp.data.di
 
-import android.app.Application
-import androidx.room.Room
+import com.android.movieapp.MyApplication
 import com.android.movieapp.data.interfaces.APIInterface
 import com.android.movieapp.data.local.AppDatabase
 import com.android.movieapp.data.local.MovieDataRepo
@@ -24,22 +23,21 @@ object MainModule {
     }
 
     @Provides
+    @Singleton
     fun provideMovieDao(appDatabase: AppDatabase): MoviesDataDao {
         return appDatabase.movieDao()
     }
 
     @Provides
+    @Singleton
     fun provideMovieRepo(moviesDataDao: MoviesDataDao): MovieDataRepo {
         return MovieDataRepo(moviesDataDao)
     }
 
     @Provides
-    fun provideAppDatabase(application: Application): AppDatabase {
-        return Room.databaseBuilder(
-            application.applicationContext,
-            AppDatabase::class.java,
-            "movie_db"
-        ).build()
+    @Singleton
+    fun provideAppDatabase(): AppDatabase {
+        return MyApplication.database
     }
 
 

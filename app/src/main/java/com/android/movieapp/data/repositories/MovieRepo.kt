@@ -19,8 +19,6 @@ class MovieRepo @Inject constructor(
         currentPage: Int
     ): Response<MovieListResponse> {
         return apiInterface.getMovies(Constants.APIKEY, searchString, currentPage)
-
-
     }
 
 
