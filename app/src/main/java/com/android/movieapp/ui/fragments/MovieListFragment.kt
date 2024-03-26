@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.android.movieapp.data.models.Search
 import com.android.movieapp.databinding.FragmentMovieListBinding
 import com.android.movieapp.utils.NetworkResult
-import com.android.movieapp.viewmodels.LocalDataViewModel
 import com.android.movieapp.viewmodels.MovieViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,7 +27,6 @@ class MovieListFragment : Fragment(), MovieListAdapter.MoviesClickListener {
     private var mList = mutableListOf<Search>()
     private val movieVM: MovieViewModel by viewModels()
     private val args: MovieListFragmentArgs by navArgs()
-    private val localVM: LocalDataViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,10 +39,10 @@ class MovieListFragment : Fragment(), MovieListAdapter.MoviesClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observeGetMovies()
-        observeOfflineData()
         adapter = MovieListAdapter(this)
-baseSearch(args.searchWord)
-
+        if(movieVM.movieLiveData.value ==null){
+            baseSearch(args.searchWord)
+        }
         binding.movieRC.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
@@ -62,29 +60,11 @@ baseSearch(args.searchWord)
             }
         })
 
-        binding.offlineBtn.setOnClickListener {
-            Log.d("OFFLINED","CLICKED")
-localVM.getAllMoviesData()
-        }
+
     }
 
     private fun baseSearch(searchWord: String) {
         movieVM.getMovies( searchWord)
-    }
-
-    private fun observeOfflineData(){
-        localVM.savedData.observe(viewLifecycleOwner) { aData ->
-            if (aData.isNullOrEmpty()) {
-                binding.toastTv.visibility = View.VISIBLE
-                binding.toastTv.text = "No Data Available"
-                binding.offlineBtn.visibility = View.GONE
-            } else {
-                binding.toastTv.visibility = View.GONE
-                binding.offlineBtn.visibility = View.GONE
-                mList.clear()
-                setRcView(aData)
-            }
-        }
     }
 
     private fun observeGetMovies() {
@@ -135,7 +115,6 @@ localVM.getAllMoviesData()
     }
 
     override fun onMoviesItemClicked(item: Search) {
-        localVM.insertMovieData(item)
         val action =
             MovieListFragmentDirections.actionMovieListFragmentToMovieDetailsFragment(item.imdbID)
         findNavController().navigate(action)
